@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        form {
+            width: 307px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 5px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button {
+            width: 303px;
+            margin: 20px auto;
+            display: block;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        div {
+            width: 307px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        div.error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>로그인</h1>
+<div th:if="${param.success}">
+    <div class="success">
+        가입이 완료되었습니다. 로그인해주세요.
+    </div>
+</div>
+<hr>
+<form method="post" action="/login">
+    <table>
+        <tr>
+            <td>ID</td>
+            <td><input type="text" name="id" size="30"/></td>
+        </tr>
+        <tr>
+            <td>PASSWORD</td>
+            <td><input type="password" name="password" size="30"/></td>
+        </tr>
+        <tr>
+            <th colspan="2"><input type="submit" value="로그인"></th>
+        </tr>
+    </table>
+</form>
+<button th:onclick="|location.href='@{https://github.com/login/oauth/authorize?client_id=0340d5bbc4fcbe157d06&scope=user:email}'|">
+    Login with Github
+<button onclick="location.href='/loginform'">
+    회원가입
+</button>
+<br/><br/>
+
+<div class="error" th:if="${param.error != null}" th:switch="${#strings.toString(param.error)}">
+    <span th:case="email">* 연동된 이메일이 존재하지 않습니다. 다시 로그인 해주십시오. *</span>
+    <span th:case="*">* 잘못된 아이디/비밀번호 입니다. *</span>
+</div>
+
+<div>
+    github 로그인을 사용 시에는 http>Resident.http>에서 사용자를 등록할 때 이메일을 깃허브 이메일과 똑같이 설정하여 등록 후 사용해주세요.
+</div>
+<div>
+    주민들의 아이디는 기본적으로 user+'residentSerialNumber'이며 남길동씨부터 1~7까지 있습니다. 비밀번호는 "1234"으로 통일됩니다.
+</div>
+
+</body>
+</html>

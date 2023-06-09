@@ -1,0 +1,45 @@
+POST /projects
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "projectAdminId" : "user4",
+  "projectName" : "project4",
+  "projectDescription" : "4번프로젝트"
+}
+
+###
+GET /projects/1/members/user1
+Host: localhost:8080
+Content-Type: application/json
+
+###
+
+GET /projects
+Host: localhost:8080
+
+###
+
+GET /projects/1
+Host: localhost:8080
+
+###
+
+PATCH /projects/1
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "projectStatus" : "SLEEP"
+}
+
+###
+
+GET /projects/memberId/jewook
+Host: localhost:8080
+Content-Type: application/json
+
+###
+GET /projects/1/tasks
+Host: localhost:8080
+Content-Type: application/json

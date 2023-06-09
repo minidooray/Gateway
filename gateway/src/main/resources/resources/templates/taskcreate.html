@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/taskcreatestyle.css">
+</head>
+<body>
+<h1>Task 생성</h1>
+<form method="post" action="/task/register">
+    <label for="projectName">프로젝트 이름:</label>
+    <select id="projectName" name="projectName" required>
+        <option value="project1">project1</option>
+        <option value="project2">project2</option>
+        <option value="project3">project3</option>
+        <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.name}"></option>
+    </select><br><br>
+
+    <label for="assignee">담당자:</label>
+    <select id="assignee" name="assignee" required>
+        <option value="user1">user1</option>
+        <option value="user2">user2</option>
+        <option value="user3">user3</option>
+        <option th:value="${session.username}" th:text="${session.username}"></option>
+    </select><br><br>
+
+    <label for="title">제목:</label>
+    <input type="text" id="title" name="title" required><br><br>
+
+    <label for="dueDate">만기일:</label>
+    <input type="date" id="dueDate" name="dueDate" ><br><br>
+
+    <label for="tag">태그:</label>
+    <select id="tag" name="tag" >
+        <option value="태그1">태그1</option>
+        <option value="태그2">태그2</option>
+        <option value="태그3">태그3</option>
+        <option th:each="tag : ${Tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+    </select><br><br>
+
+    <label for="milestone">마일스톤:</label>
+    <select id="milestone" name="milestone">
+        <option value="마일스톤1">마일스톤1</option>
+        <option value="마일스톤2">마일스톤2</option>
+        <option value="마일스톤3">마일스톤3</option>
+        <option th:each="milestone : ${Milestones}" th:value="${milestone.id}" th:text="${milestone.name}"></option>
+    </select><br><br>
+
+    <label for="content">작성글:</label><br>
+    <textarea id="content" name="content" rows="6" cols="100" ></textarea><br><br>
+
+
+
+    <input type="submit" value="작성 완료">
+</form>
+</body>
+</html>

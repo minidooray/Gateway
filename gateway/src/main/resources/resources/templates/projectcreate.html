@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/projectcreatestyle.css">
+</head>
+<body>
+<form method="post" action="/project/register">
+    <h1>프로젝트 추가</h1>
+    <div class="divider"></div>
+    <label for="title">프로젝트명 :</label>
+    <br />
+    <input type="text" id="title" name="title" required />
+    <br /><br />
+    <label for="content">설명 :</label>
+    <br />
+    <textarea id="content" name="content" rows="10" cols="80" required></textarea>
+    <br />
+    <input type="submit" value="등록하기" />
+</form>
+</body>
+</html>

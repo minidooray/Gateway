@@ -1,0 +1,25 @@
+POST http://localhost:8080/account
+Content-Type: application/json
+
+{
+  "account_id": "tkdltlf4",
+  "account_pwd": "1234",
+  "account_name": "정승우",
+  "account_email": "tkdltlf@naver.com"
+}
+
+###
+GET http://localhost:8080/account
+
+
+###
+GET http://localhost:8080/account/tkdltlf
+
+
+
+###
+POST http://localhost:8080/account/tkdltlf/dormancy
+
+
+###
+DELETE http://localhost:8080/account/tkdltlf

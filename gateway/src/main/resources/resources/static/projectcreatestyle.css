@@ -1,0 +1,47 @@
+/* 폼 전체 스타일 */
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 제목 스타일 */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 실선 스타일 */
+.divider {
+    border-top: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+/* 나머지 스타일 */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* 입력 필드 크기를 padding과 border를 포함한 전체 크기로 설정 */
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
