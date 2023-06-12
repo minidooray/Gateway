@@ -3,75 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        form {
-            width: 307px;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        table {
-            width: 100%;
-        }
-
-        td {
-            padding: 10px;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 5px;
-        }
-
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-
-        button {
-            width: 303px;
-            margin: 20px auto;
-            display: block;
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        div {
-            width: 307px;
-            margin: 0 auto;
-            padding: 10px;
-        }
-
-        div.error {
-            color: red;
-            text-align: center;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="/loginstyle.css">
 </head>
 <body>
 
@@ -107,13 +39,6 @@
 <div class="error" th:if="${param.error != null}" th:switch="${#strings.toString(param.error)}">
     <span th:case="email">* 연동된 이메일이 존재하지 않습니다. 다시 로그인 해주십시오. *</span>
     <span th:case="*">* 잘못된 아이디/비밀번호 입니다. *</span>
-</div>
-
-<div>
-    github 로그인을 사용 시에는 http>Resident.http>에서 사용자를 등록할 때 이메일을 깃허브 이메일과 똑같이 설정하여 등록 후 사용해주세요.
-</div>
-<div>
-    주민들의 아이디는 기본적으로 user+'residentSerialNumber'이며 남길동씨부터 1~7까지 있습니다. 비밀번호는 "1234"으로 통일됩니다.
 </div>
 
 </body>

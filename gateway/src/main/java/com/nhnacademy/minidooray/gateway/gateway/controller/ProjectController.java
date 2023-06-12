@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
@@ -43,6 +44,7 @@ public class ProjectController {
                 })
                 .collect(Collectors.toList());
         model.addAttribute("Projects",matchingProjects);
+
         return "project";
     }
     @GetMapping("/projects/{id}")
@@ -65,6 +67,7 @@ public class ProjectController {
                 .collect(Collectors.toList());
         model.addAttribute("Projects",matchingProjects);
         model.addAttribute("Tasks",adaptor2.getTaskByProjectId(id).get());
+        model.addAttribute("Select", "project");
         return "project";
     }
 

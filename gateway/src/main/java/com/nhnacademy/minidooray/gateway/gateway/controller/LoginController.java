@@ -76,7 +76,7 @@ public class LoginController {
 
         session.setAttribute("username", account.getAccountId());
         session.setAttribute("authority", "ROLE_USER");
-        return "/project";
+        return "redirect:/project";
     }
 
     //회원가입 이동
