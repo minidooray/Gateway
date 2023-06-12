@@ -12,6 +12,6 @@ public interface ProjectAdaptor {
     Optional<List<ProjectDto>> getProjects();
     Optional<ProjectDto> getProjectById(Long id);
 
-    Optional<Result> registerProject(ProjectRegister projectRegister);
+    Optional<ProjectDto> registerProject(ProjectRegister projectRegister);
     Optional<Result> updateProject(Long id, ProjectStatusDto projectStatusDto);
 }

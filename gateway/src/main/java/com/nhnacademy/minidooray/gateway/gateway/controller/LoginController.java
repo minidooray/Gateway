@@ -59,7 +59,7 @@ public class LoginController {
         AccountDto account = accountService.getAccountByEmail(emailAddress);
 
 
-        if(Objects.isNull(account)) {
+        if(Objects.isNull(account.getAccountId())) {
             return "redirect:/login?error=email";
         }
 

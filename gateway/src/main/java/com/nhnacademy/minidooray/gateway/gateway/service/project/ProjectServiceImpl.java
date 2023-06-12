@@ -1,7 +1,9 @@
 package com.nhnacademy.minidooray.gateway.gateway.service.project;
 
 import com.nhnacademy.minidooray.gateway.gateway.adaptor.ProjectAdaptor;
+import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
 import com.nhnacademy.minidooray.gateway.gateway.domain.project.ProjectDto;
+import com.nhnacademy.minidooray.gateway.gateway.domain.project.ProjectRegister;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,15 @@ public class ProjectServiceImpl implements ProjectService{
     @Override
     public List<ProjectDto> getProjects() {
         return adaptor.getProjects().get();
+    }
+
+    @Override
+    public ProjectDto registerProject(ProjectRegister projectRegister) {
+        return adaptor.registerProject(projectRegister).get();
+    }
+
+    @Override
+    public ProjectDto getProject(Long id) {
+        return adaptor.getProjectById(id).get();
     }
 }

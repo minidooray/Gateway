@@ -3,7 +3,9 @@ package com.nhnacademy.minidooray.gateway.gateway.controller;
 import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountRegister;
+import com.nhnacademy.minidooray.gateway.gateway.domain.project.ProjectMemberId;
 import com.nhnacademy.minidooray.gateway.gateway.service.account.AccountService;
+import com.nhnacademy.minidooray.gateway.gateway.service.projectMember.ProjectMemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 @Slf4j
 public class AccountController {
     private final AccountService accountService;
+    private final ProjectMemberService memberService;
     @PostMapping("/account")
     public AccountDto registerAccount(@RequestBody AccountRegister accountRegister){
         return accountService.registerAccount(accountRegister);
@@ -36,5 +39,10 @@ public class AccountController {
     @DeleteMapping("/account/{id}")
     public Result deleteAccountById(@PathVariable String id){
         return accountService.deleteAccount(id);
+    }
+
+    @GetMapping("/projects/{id}/members")
+    public List<ProjectMemberId> getAccountByProject(@PathVariable Long id){
+        return memberService.getMemberIdsByProjectId(id);
     }
 }

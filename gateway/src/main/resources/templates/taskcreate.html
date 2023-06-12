@@ -9,16 +9,16 @@
 </head>
 <body>
 <h1>Task 생성</h1>
-<form method="post" action="/task/register">
+<form method="post" action="/project/task/register">
     <label for="projectName">프로젝트 이름:</label>
     <select id="projectName" name="projectName" required>
-        <option th:each="project : ${Projects}" th:value="${project.projectId}" th:text="${project.projectName}"></option>
+        <option th:value="${Project.projectId}" th:text="${Project.projectName}"></option>
     </select><br><br>
 
     <label for="assignee">담당자:</label>
     <select id="assignee" name="assignee" required>
         <option  th:value="allAccounts" >java-백앤드-3-교육/all</option>
-        <option th:each="account : ${Accounts}" th:value="${account.getAccountId()}" th:text="${account.accountName}"></option>
+        <option th:each="account : ${allAccounts}" th:value="${account.getAccountId()}" th:text="${account.accountName}"></option>
     </select><br><br>
 
     <label for="title">제목:</label>
@@ -30,14 +30,14 @@
     <label for="tag">태그:</label>
     <select id="tag" name="tag">
         <option value="">없음</option>
-        <option th:each="tag : ${Tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+        <option th:each="tag : ${Tags}" th:value="${tag.tagId}" th:text="${tag.tagContent}"></option>
     </select><br><br>
 
 
     <label for="milestone">마일스톤:</label>
     <select id="milestone" name="milestone">
         <option value="">없음</option>
-        <option th:each="milestone : ${Milestones}" th:value="${milestone.id}" th:text="${milestone.name}"></option>
+        <option th:each="milestone : ${Milestones}" th:value="${milestone.milestoneId}" th:text="${milestone.milestoneContent}"></option>
     </select><br><br>
 
     <label for="content">작성글:</label><br>

@@ -46,7 +46,7 @@ public class ProjectAdaptorImpl implements ProjectAdaptor {
     }
 
     @Override
-    public Optional<Result> registerProject(ProjectRegister projectRegister) {
+    public Optional<ProjectDto> registerProject(ProjectRegister projectRegister) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
@@ -55,7 +55,7 @@ public class ProjectAdaptorImpl implements ProjectAdaptor {
         params.put("projectName", projectRegister.getProjectName());
         params.put("projectDescription", projectRegister.getProjectDescription());
         HttpEntity entity = new HttpEntity(projectRegister,headers);
-        ResponseEntity<Result> exchange = restTemplate.exchange("http://localhost:8082/projects",HttpMethod.POST,entity,Result.class);
+        ResponseEntity<ProjectDto> exchange = restTemplate.exchange("http://localhost:8082/projects",HttpMethod.POST,entity,ProjectDto.class);
         return Optional.of(exchange.getBody());
     }
 

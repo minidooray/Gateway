@@ -18,8 +18,9 @@
 
 <div class="content">
     <div class="project-sidebar">
-        <button class="hightlight-button" style="width: 100%; font-size: 16px; color: #000000;"
-                onclick="location.href = '/task/register';">+ 새 업무</button>
+        <a th:href="@{/project/{projectId}/task/register(projectId=${ProjectId})}" th:if="${ProjectId!=null}">
+        <button class="hightlight-button" style="width: 100%; font-size: 16px; color: #000000;" >+ 새 업무</button>
+        </a>
         <br><br>
         <button class="hightlight-button"  style="width: 100%; font-size: 16px; color: #000000;"
                 onclick="location.href = '/project/register';">프로젝트 만들기</button>
