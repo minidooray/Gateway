@@ -7,6 +7,7 @@ import com.nhnacademy.minidooray.gateway.gateway.domain.project.ProjectMemberId;
 import com.nhnacademy.minidooray.gateway.gateway.domain.task.TaskDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.task.TaskRegister;
 import com.nhnacademy.minidooray.gateway.gateway.domain.task.TaskRegisterDto;
+import com.nhnacademy.minidooray.gateway.gateway.exception.ProjectNotFoundException;
 import com.nhnacademy.minidooray.gateway.gateway.service.account.AccountService;
 import com.nhnacademy.minidooray.gateway.gateway.service.milestone.MileService;
 import com.nhnacademy.minidooray.gateway.gateway.service.project.ProjectService;
@@ -41,7 +42,12 @@ public class TaskController {
 
     @GetMapping("/project/{projectId}/task/register")
     public String viewTaskRegister(@PathVariable Long projectId, Model model){
-        ProjectDto projectDto = projectService.getProject(projectId);
+        ProjectDto projectDto = null;
+        try {
+            projectDto = projectService.getProject(projectId);
+        } catch (ProjectNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         List<ProjectMemberId> projectMemberIds = memberService.getMemberIdsByProjectId(projectId);
         List<AccountDto> projectMembers = new ArrayList<>();
 

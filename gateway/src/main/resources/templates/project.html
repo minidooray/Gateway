@@ -12,13 +12,21 @@
 
 <div class="header">
     <h2 style="color: #ffffff; font-family: 'Arial Black', sans-serif; font-size: 28px; margin: 0;">Mini Dooray</h2>
-    <h2 th:text="${session.username} + ', 테스트중' " style="color: #ffffff; margin-top: 0; margin-left: auto; cursor: pointer;" onclick="toggleMenu()"></h2>
+    &nbsp;&nbsp;&nbsp;
+
+    <h2 th:if="${Project!=null}" th:text="${Project.projectName + '설정'}"
+        style="color: #ffffff; font-family: 'Arial Black', sans-serif; font-size: 28px; margin: 0; cursor: pointer;"
+        onclick="projectMenu();"></h2>
+
+
+    <h2 th:text="${session.username} + ', 테스트중' " style="color: #ffffff; font-family: 'Arial Black',
+     sans-serif; font-size: 28px; margin-top: 0; margin-left: auto; cursor: pointer;" onclick="toggleMenu()"></h2>
 </div>
 
 
 <div class="content">
     <div class="project-sidebar">
-        <a th:href="@{/project/{projectId}/task/register(projectId=${ProjectId})}" th:if="${ProjectId!=null}">
+        <a th:href="@{/project/{projectId}/task/register(projectId=${Project.projectId})}" th:if="${Project !=null}">
         <button class="hightlight-button" style="width: 100%; font-size: 16px; color: #000000;" >+ 새 업무</button>
         </a>
         <br><br>
@@ -41,6 +49,8 @@
 
     </div>
 
+
+
     <div class="task-list" style="max-height: 600px; overflow-y: auto; border: 2px solid #000;">
         <table>
             <thead>
@@ -53,8 +63,7 @@
                 <td th:onclick="'window.location.href = \'/tasks/\' + \'' + ${task.taskId} + '\''" style="cursor: pointer;">
                     <span th:text="${task.taskTitle}" style="font-size: 24px; font-weight: bold; color: #000;"></span>
                     <br>
-                    <p th:text="${task.taskManagerId}" style="font-size: 16px; color: #666;"></p>
-                </td>
+                    <p th:text="${task.taskId + '/' + task.taskManagerId}" style="font-size: 16px; color: #666;"></p>
             </tr>
             </tbody>
         </table>
@@ -69,7 +78,7 @@
 
         <div th:if="${Select} == 'project'">
             <div style="border: 1px solid #ccc; padding: 10px;">
-                <h1>프로젝트 입니다</h1>
+                <h1 th:text="${Project.projectName +' '+ '프로젝트 입니다'}"></h1>
             </div>
             <div style="border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
                 <table>
@@ -83,7 +92,7 @@
                     <tr th:each="account : ${Accounts}">
                         <td>
                             <a th:href="@{/account/{accountId}(taskId=${account.accountId})}">
-                                <span th:text="${account.accountname}"></span>
+                                <span th:text="${account.getAccountName()}"></span>
                             </a>
                         </td>
                     </tr>
@@ -94,7 +103,20 @@
 
 
         <div th:if="${Select} == 'task'">
-
+            <div style="margin-bottom: 20px;">
+                <h3 th:text="${Task.taskId + '/' + Task.taskManagerId}" style="font-size: 20px; color: #333; font-weight: bold;"></h3>
+                <h1 th:text="${Task.taskTitle}" style="font-size: 24px; color: #000;"></h1>
+                <ul>
+                    <li th:each="tag : ${Tags}" th:value="${tag.tagId}" th:text="${tag.tagContent}" style="font-size: 16px; color: #666;"></li>
+                </ul>
+            </div>
+            <div>
+                <p th:text="'등록자: ' + ${session.username}" style="font-size: 16px; color: #666;"></p>
+                <p th:text="'담당자: ' + ${Task.taskManagerId}" style="font-size: 16px; color: #666;"></p>
+            </div>
+            <div>
+                <textarea th:text="${Task.taskContent}" style="width: 100%; height: 200px; font-size: 14px; color: #333;"></textarea>
+            </div>
         </div>
 
         <div th:unless="${Select}">
@@ -107,6 +129,17 @@
 <div id="menu" class="menu">
     <!-- 메뉴 아이템들 -->
     <a href="/logout">로그아웃</a>
+</div>
+
+<div id="projectmenu" class="projectmenu">
+    <div style="display: flex; flex-direction: column;">
+        <a href="/addmember">Member 추가</a>
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 10px 0;">
+        <a th:href="@{/projects/{projectId}/tag/register(projectId=${Project?.projectId})}">Tag 추가</a>
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 10px 0;">
+        <a th:href="@{/projects/{projectId}/milestone/register(projectId=${Project?.projectId})}">MileStone 추가</a>
+    </div>
+
 </div>
 </body>
 </html>

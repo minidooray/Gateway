@@ -8,5 +8,13 @@ function toggleMenu() {
     menu.classList.toggle("active");
 }
 
+function projectMenu() {
+    var menu = document.getElementById("projectmenu");
+    menu.classList.toggle("active");
+}
+
 var username = document.getElementById("username");
 username.addEventListener("click", toggleMenu);
+
+var thisproject = document.getElementById("projectName");
+thisproject.addEventListener("click",projectMenu)

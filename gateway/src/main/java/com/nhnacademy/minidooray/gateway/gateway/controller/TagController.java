@@ -20,10 +20,11 @@ public class TagController {
     @GetMapping("/projects/{id}/tag/register")
     public String viewRegisterTag(@PathVariable Long id, Model model){
         model.addAttribute("ProjectId", id);
-        return "tagcreate";
+        model.addAttribute("Select","tag");
+        return "chores";
     }
 
-    @PostMapping()
+    @PostMapping("/projects/tag/register")
     public String registerTag(@ModelAttribute TagRegister tagRegister){
         tagService.registerTag(tagRegister.getProjectId(),new TagRegisterDto(tagRegister.getTagContent()));
         return "redirect:/projects/"+tagRegister.getProjectId();

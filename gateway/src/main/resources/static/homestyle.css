@@ -106,3 +106,16 @@ a {
     display: block;
 }
 
+
+.projectmenu {
+    position: absolute;
+    background-color: #f1f1f1;
+    padding: 10px;
+    left: calc(20%);
+    top: 60px;
+    display: none;
+}
+.projectmenu.active{
+    display: block;
+}
+

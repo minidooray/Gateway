@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/choresstyle.css">
+</head>
+<body>
+<div class="center">
+    <div class="form-container">
+        <form method="post" th:action="${Select == 'tag' ? '/projects/tag/register' : 'projects/milestone/register'}">
+            <div th:if="${Select} == 'tag'">
+                <label for="tagtitle">태그명:</label>
+                <input type="text" id="tagtitle" name="tagtitle" required>
+                <input type="hidden" name="projectId" th:value="${ProjectId}">
+            </div>
+
+            <div th:if="${Select} == 'milestone'">
+                <label for="milestonetitle">마일스톤명:</label>
+                <input type="text" id="milestonetitle" name="milestonetitle" required><br><br>
+                <label for="dueDate">기간:</label>
+                <input type="date" id="dueDate" name="dueDate">
+                <input type="hidden" name="projectId" th:value="${ProjectId}">
+            </div>
+
+            <button type="submit">제출</button>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
