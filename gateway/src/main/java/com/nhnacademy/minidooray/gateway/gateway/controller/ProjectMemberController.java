@@ -35,7 +35,8 @@ public class ProjectMemberController {
             }
         }
         model.addAttribute("Accounts", accounts);
-        return "projectmembercreate";
+        model.addAttribute("ProjectId", id);
+        return "addmember";
     }
     @PostMapping("/projects/projectMember/register")
     public String registerProjectMember(@ModelAttribute ProjectMemberRegister projectMemberRegister){

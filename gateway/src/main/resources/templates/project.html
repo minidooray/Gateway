@@ -60,10 +60,13 @@
             </thead>
             <tbody>
             <tr th:each="task : ${Tasks}" style="cursor: pointer; width: 200px; height: 100px;">
-                <td th:onclick="'window.location.href = \'/tasks/\' + \'' + ${task.taskId} + '\''" style="cursor: pointer;">
+                <td style="cursor: pointer;" th:onclick="'redirectToTask(\'' + ${Project.projectId} + '\', \'' + ${task.taskId} + '\')'">
                     <span th:text="${task.taskTitle}" style="font-size: 24px; font-weight: bold; color: #000;"></span>
                     <br>
                     <p th:text="${task.taskId + '/' + task.taskManagerId}" style="font-size: 16px; color: #666;"></p>
+                </td>
+
+
             </tr>
             </tbody>
         </table>
@@ -101,23 +104,33 @@
             </div>
         </div>
 
-
-        <div th:if="${Select} == 'task'">
-            <div style="margin-bottom: 20px;">
-                <h3 th:text="${Task.taskId + '/' + Task.taskManagerId}" style="font-size: 20px; color: #333; font-weight: bold;"></h3>
-                <h1 th:text="${Task.taskTitle}" style="font-size: 24px; color: #000;"></h1>
-                <ul>
-                    <li th:each="tag : ${Tags}" th:value="${tag.tagId}" th:text="${tag.tagContent}" style="font-size: 16px; color: #666;"></li>
-                </ul>
+        <div th:if="${Select} == 'task'" style="padding: 20px; background-color: #f5f5f5; border-radius: 5px; height: 600px;">
+            <div style="margin-bottom: 10px; background: white;">
+                <p th:text="${Task.taskId + '/' + Task.taskManagerId}" style="font-size: 18px; color: #333; font-weight: bold;"></p>
+                <h1 th:text="${Task.taskTitle}" style="color: #000;"></h1>
+            </div>
+            <div style="font-size: 14px; color: #666; background: white;">
+                <p th:text="'등록자: ' + ${session.username}"></p>
+                <p th:text="'담당자: ' + ${Task.taskManagerId}"></p>
+            </div>
+            <div style="width: 100%; height: 180px;">
+                <textarea th:text="${Task.taskContent}" readonly style="width: 100%; height: 100%; font-size: 25px; color: #333; background-color: white; border: none; outline: none;"></textarea>
+            </div>
+            <div th:if="${Comments != null}">
+                <h2>히스토리</h2>
+                <div th:each="comment : ${Comments}" style="margin-top: 20px;">
+                    <textarea th:value="${comment.commentId}" th:text="${comment.commentContent}" style="width: 100%; height: 80px; font-size: 14px; color: #333; background-color: white; border: none; outline: none;" readonly></textarea>
+                </div>
             </div>
             <div>
-                <p th:text="'등록자: ' + ${session.username}" style="font-size: 16px; color: #666;"></p>
-                <p th:text="'담당자: ' + ${Task.taskManagerId}" style="font-size: 16px; color: #666;"></p>
-            </div>
-            <div>
-                <textarea th:text="${Task.taskContent}" style="width: 100%; height: 200px; font-size: 14px; color: #333;"></textarea>
+                <h2>댓글 작성</h2>
+                <form action="/projects/task/comment/register" method="post">
+                    <textarea name="commentContent" style="width: 100%; height: 80px; font-size: 14px; color: #333; background-color: white; border: none; outline: none;"></textarea>
+                    <button type="submit" style="margin-top: 10px; padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer;">댓글 작성</button>
+                </form>
             </div>
         </div>
+
 
         <div th:unless="${Select}">
             <h1>Hello Mini Dooray</h1>
@@ -133,7 +146,7 @@
 
 <div id="projectmenu" class="projectmenu">
     <div style="display: flex; flex-direction: column;">
-        <a href="/addmember">Member 추가</a>
+        <a th:href="@{/projects/{projectId}/projectMember/register(projectId=${Project?.projectId})}">Member 추가</a>
         <hr style="border: none; border-top: 1px solid #ccc; margin: 10px 0;">
         <a th:href="@{/projects/{projectId}/tag/register(projectId=${Project?.projectId})}">Tag 추가</a>
         <hr style="border: none; border-top: 1px solid #ccc; margin: 10px 0;">

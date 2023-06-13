@@ -2,13 +2,16 @@ package com.nhnacademy.minidooray.gateway.gateway.controller;
 
 import com.nhnacademy.minidooray.gateway.gateway.adaptor.ProjectMemberAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.adaptor.TaskAdaptor;
+import com.nhnacademy.minidooray.gateway.gateway.adaptor.TaskTagAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.project.*;
 import com.nhnacademy.minidooray.gateway.gateway.exception.ProjectNotFoundException;
 import com.nhnacademy.minidooray.gateway.gateway.service.account.AccountService;
 import com.nhnacademy.minidooray.gateway.gateway.service.comment.CommentService;
+import com.nhnacademy.minidooray.gateway.gateway.service.milestone.MileService;
 import com.nhnacademy.minidooray.gateway.gateway.service.project.ProjectService;
 import com.nhnacademy.minidooray.gateway.gateway.service.projectMember.ProjectMemberService;
+import com.nhnacademy.minidooray.gateway.gateway.service.tag.TagService;
 import com.nhnacademy.minidooray.gateway.gateway.service.task.TaskService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +34,8 @@ public class ProjectController {
     private final ProjectMemberService memberService;
     private final TaskService taskService;
     private final AccountService accountService;
+    private final TagService tagService;
+    private final MileService mileService;
     private final CommentService commentService;
     @GetMapping("/project")
     public String viewProjects(Model model, HttpSession session){
@@ -104,9 +109,10 @@ public class ProjectController {
         model.addAttribute("Projects",matchingProjects);
         model.addAttribute("Tasks",taskService.getTaskByProjectId(id));
         model.addAttribute("Select", "task");
-        model.addAttribute("ProjectId",id);
+        model.addAttribute("Project",projectService.getProject(id));
         model.addAttribute("Task",taskService.getTask(taskId));
-        model.addAttribute("Comments",commentService.getCommentsByTaskId(taskId));
+//        model.addAttribute("Tag",tagService.getTag(taskId));
+//        model.addAttribute("Comments",commentService.getCommentsByTaskId(taskId));
         return "project";
     }
     @GetMapping("/project/register")

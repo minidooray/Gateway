@@ -3,6 +3,11 @@ function toggleProjectList() {
     projectList.classList.toggle("hidden");
 }
 
+function redirectToTask(projectId, taskId) {
+    var url = '/projects/' + projectId + '/task/' + taskId;
+    window.location.href = url;
+}
+
 function toggleMenu() {
     var menu = document.getElementById("menu");
     menu.classList.toggle("active");

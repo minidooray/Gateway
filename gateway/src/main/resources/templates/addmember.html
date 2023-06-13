@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/addmemberstyle.css">
 </head>
 <body>
-
+<div class="form-container">
+    <h2>Member 추가</h2>
+    <form method="post" th:action="@{/projects/projectMember/register}">
+        <div class="checkbox-group" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+            <div th:each="account, iteration : ${Accounts}" style="flex-basis: calc(33.33% - 10px);">
+                <label>
+                    <input type="checkbox" th:value="${account.accountId}" name="selectedAccounts">
+                    <a th:href="@{/account/{accountId}(taskId=${account.accountId})}" style="margin-left: 5px;">
+                        <span th:text="${account.getAccountName()}"></span>
+                    </a>
+                </label>
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 </body>
 </html>
