@@ -40,4 +40,15 @@ public class TaskAdaptorImpl implements TaskAdaptor {
         return Optional.of(exchange.getBody());
     }
 
+    @Override
+    public Optional<TaskDto> getTask(Long id) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity entity = new HttpEntity(headers);
+        ResponseEntity<TaskDto> exchange =
+                restTemplate.exchange("http://localhost:8082/projects/1/tasks/{id}", HttpMethod.GET, entity, TaskDto.class, id);
+        return Optional.of(exchange.getBody());
+    }
+
 }

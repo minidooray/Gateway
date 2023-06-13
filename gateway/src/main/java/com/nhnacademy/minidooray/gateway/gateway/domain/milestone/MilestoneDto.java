@@ -1,4 +1,4 @@
-package com.nhnacademy.minidooray.gateway.gateway.domain.task;
+package com.nhnacademy.minidooray.gateway.gateway.domain.milestone;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

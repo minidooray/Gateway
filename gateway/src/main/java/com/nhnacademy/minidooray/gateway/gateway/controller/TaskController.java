@@ -58,14 +58,6 @@ public class TaskController {
     }
     @PostMapping("project/task/register")
     public String taskRegister(@ModelAttribute TaskRegisterDto registerDto,HttpSession session){
-        log.info("tasktest:{}",registerDto.getAssignee());
-        log.info("tasktest:{}",registerDto.getTag());
-        log.info("tasktest:{}",registerDto.getTitle());
-        log.info("tasktest:{}",registerDto.getMilestone());
-        log.info("tasktest:{}",registerDto.getDueDate());
-        log.info("tasktest:{}",registerDto.getContent());
-        log.info("tasktest:{}",registerDto.getProjectName());
-        log.info("tasktest:{}",session.getAttribute("username").toString());
         //task 등록
         //task tag 연결
         TaskRegister taskRegister = new TaskRegister(registerDto.getTitle(),registerDto.getContent(),session.getAttribute("username").toString(),registerDto.getAssignee(),
@@ -75,6 +67,6 @@ public class TaskController {
         for(Long tag:registerDto.getTag()){
             taskTagService.registerTaskTag(registerDto.getProjectName(),taskDto.getTaskId(),tag);
         }
-        return "redirect:/project";
+        return "redirect:/project/"+registerDto.getProjectName()+"/task/"+taskDto.getTaskId();
     }
 }

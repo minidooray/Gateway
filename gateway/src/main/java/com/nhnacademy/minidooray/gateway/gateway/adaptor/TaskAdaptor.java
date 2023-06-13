@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface TaskAdaptor {
     Optional<List<TaskDto>> getTaskByProjectId(Long id);
     Optional<TaskDto> registerTask(Long projectId,TaskRegister taskRegister);
+    Optional<TaskDto> getTask(Long id);
 }

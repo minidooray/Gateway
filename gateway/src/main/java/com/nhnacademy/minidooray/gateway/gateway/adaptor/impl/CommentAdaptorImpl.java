@@ -1,10 +1,11 @@
 package com.nhnacademy.minidooray.gateway.gateway.adaptor.impl;
 
-import com.nhnacademy.minidooray.gateway.gateway.adaptor.MilestoneAdaptor;
+import com.nhnacademy.minidooray.gateway.gateway.adaptor.CommentAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
-import com.nhnacademy.minidooray.gateway.gateway.domain.milestone.MilestoneDto;
-import com.nhnacademy.minidooray.gateway.gateway.domain.milestone.MilestoneRegisterDto;
+import com.nhnacademy.minidooray.gateway.gateway.domain.comment.CommentDto;
+import com.nhnacademy.minidooray.gateway.gateway.domain.comment.CommentRegisterDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -15,28 +16,29 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class MileStoneAdaptorImpl implements MilestoneAdaptor {
+@Slf4j
+public class CommentAdaptorImpl implements CommentAdaptor {
     private final RestTemplate restTemplate;
     @Override
-    public Optional<List<MilestoneDto>> getMilestonesByProjectId(Long projectId) {
+    public Optional<List<CommentDto>> getCommentsByTaskId(Long taskId) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
-        ResponseEntity<List<MilestoneDto>> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/{id}/milestones", HttpMethod.GET, entity, new ParameterizedTypeReference<List<MilestoneDto>>() {
-                },projectId);
+        ResponseEntity<List<CommentDto>> exchange =
+                restTemplate.exchange("http://localhost:8082/projects/1/task/{taskId}/comments", HttpMethod.GET, entity, new ParameterizedTypeReference<List<CommentDto>>() {
+                },taskId);
         return Optional.of(exchange.getBody());
     }
 
     @Override
-    public Optional<Result> registerMilestone(Long projectId, MilestoneRegisterDto milestoneRegisterDto) {
+    public Optional<Result> registerCommentByTaskId(Long taskId, CommentRegisterDto commentRegisterDto) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-        HttpEntity entity = new HttpEntity(milestoneRegisterDto,headers);
+        HttpEntity entity = new HttpEntity(commentRegisterDto,headers);
         ResponseEntity<Result> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/{id}/milestones", HttpMethod.POST, entity,Result.class,projectId);
+                restTemplate.exchange("http://localhost:8082/projects/1/task/{taskId}/comments", HttpMethod.POST, entity, Result.class,taskId);
         return Optional.of(exchange.getBody());
     }
 }

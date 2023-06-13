@@ -4,6 +4,7 @@ import com.nhnacademy.minidooray.gateway.gateway.adaptor.ProjectAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
 import com.nhnacademy.minidooray.gateway.gateway.domain.project.ProjectDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.project.ProjectRegister;
+import com.nhnacademy.minidooray.gateway.gateway.exception.ProjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,11 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
-    public ProjectDto getProject(Long id) {
-        return adaptor.getProjectById(id).get();
+    public ProjectDto getProject(Long id) throws ProjectNotFoundException {
+        if(adaptor.getProjectById(id).isPresent()){
+            return adaptor.getProjectById(id).get();
+        } else {
+            throw new ProjectNotFoundException(id.toString());
+        }
     }
 }

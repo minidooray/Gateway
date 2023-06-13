@@ -1,8 +1,8 @@
 package com.nhnacademy.minidooray.gateway.gateway.adaptor;
 
 import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
-import com.nhnacademy.minidooray.gateway.gateway.domain.task.MilestoneDto;
-import com.nhnacademy.minidooray.gateway.gateway.domain.task.MilestoneRegisterDto;
+import com.nhnacademy.minidooray.gateway.gateway.domain.milestone.MilestoneDto;
+import com.nhnacademy.minidooray.gateway.gateway.domain.milestone.MilestoneRegisterDto;
 
 import java.util.List;
 import java.util.Optional;

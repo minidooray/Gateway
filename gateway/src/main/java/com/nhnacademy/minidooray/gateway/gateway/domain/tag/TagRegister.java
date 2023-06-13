@@ -1,4 +1,4 @@
-package com.nhnacademy.minidooray.gateway.gateway.domain.task;
+package com.nhnacademy.minidooray.gateway.gateway.domain.tag;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TagDto {
-    private Long tagId;
+public class TagRegister {
+    private Long projectId;
     private String tagContent;
 }
