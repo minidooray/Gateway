@@ -2,10 +2,7 @@ package com.nhnacademy.minidooray.gateway.gateway.service.tasktag;
 
 import com.nhnacademy.minidooray.gateway.gateway.adaptor.TaskTagAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
-import com.nhnacademy.minidooray.gateway.gateway.domain.task.TaskDto;
-import com.nhnacademy.minidooray.gateway.gateway.domain.task.TaskRegister;
-import com.nhnacademy.minidooray.gateway.gateway.domain.task.TaskTagDto;
-import com.nhnacademy.minidooray.gateway.gateway.service.task.TaskService;
+import com.nhnacademy.minidooray.gateway.gateway.domain.tasktag.TaskTagDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -73,6 +73,6 @@ public class TaskController {
         for(Long tag:registerDto.getTag()){
             taskTagService.registerTaskTag(registerDto.getProjectName(),taskDto.getTaskId(),tag);
         }
-        return "redirect:/project/"+registerDto.getProjectName()+"/task/"+taskDto.getTaskId();
+        return "redirect:/projects/"+registerDto.getProjectName()+"/task/"+taskDto.getTaskId();
     }
 }

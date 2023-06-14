@@ -126,6 +126,8 @@
                 <h2>댓글 작성</h2>
                 <form action="/projects/task/comment/register" method="post">
                     <textarea name="commentContent" style="width: 100%; height: 80px; font-size: 14px; color: #333; background-color: white; border: none; outline: none;"></textarea>
+                    <input type="hidden" name="taskId" th:value="${Task.taskId}">
+                    <input type="hidden" name="projectId" th:value="${Project.projectId}">
                     <button type="submit" style="margin-top: 10px; padding: 5px 10px; background-color: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer;">댓글 작성</button>
                 </form>
             </div>

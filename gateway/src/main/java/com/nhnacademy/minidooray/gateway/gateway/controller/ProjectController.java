@@ -5,6 +5,8 @@ import com.nhnacademy.minidooray.gateway.gateway.adaptor.TaskAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.adaptor.TaskTagAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.project.*;
+import com.nhnacademy.minidooray.gateway.gateway.domain.tag.TagDto;
+import com.nhnacademy.minidooray.gateway.gateway.domain.tasktag.TaskTagDto;
 import com.nhnacademy.minidooray.gateway.gateway.exception.ProjectNotFoundException;
 import com.nhnacademy.minidooray.gateway.gateway.service.account.AccountService;
 import com.nhnacademy.minidooray.gateway.gateway.service.comment.CommentService;
@@ -13,6 +15,7 @@ import com.nhnacademy.minidooray.gateway.gateway.service.project.ProjectService;
 import com.nhnacademy.minidooray.gateway.gateway.service.projectMember.ProjectMemberService;
 import com.nhnacademy.minidooray.gateway.gateway.service.tag.TagService;
 import com.nhnacademy.minidooray.gateway.gateway.service.task.TaskService;
+import com.nhnacademy.minidooray.gateway.gateway.service.tasktag.TaskTagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -37,6 +40,7 @@ public class ProjectController {
     private final TagService tagService;
     private final MileService mileService;
     private final CommentService commentService;
+    private final TaskTagService taskTagService;
     @GetMapping("/project")
     public String viewProjects(Model model, HttpSession session){
         String id = (String) session.getAttribute("username");
@@ -106,13 +110,19 @@ public class ProjectController {
                     return false;
                 })
                 .collect(Collectors.toList());
+        List<TaskTagDto> tagIds = taskTagService.getTagIdByTaskId(taskId);
+        List<TagDto> tags = new ArrayList<>();
+        for(TaskTagDto tagId: tagIds){
+            tags.add(tagService.getTag(tagId.getTagId()));
+        }
         model.addAttribute("Projects",matchingProjects);
         model.addAttribute("Tasks",taskService.getTaskByProjectId(id));
         model.addAttribute("Select", "task");
         model.addAttribute("Project",projectService.getProject(id));
         model.addAttribute("Task",taskService.getTask(taskId));
-//        model.addAttribute("Tag",tagService.getTag(taskId));
-//        model.addAttribute("Comments",commentService.getCommentsByTaskId(taskId));
+        model.addAttribute("Tags",tags);
+        model.addAttribute("Comments",commentService.getCommentsByTaskId(taskId));
+
         return "project";
     }
     @GetMapping("/project/register")

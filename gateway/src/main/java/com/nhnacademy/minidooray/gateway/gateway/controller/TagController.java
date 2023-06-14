@@ -26,7 +26,7 @@ public class TagController {
 
     @PostMapping("/projects/tag/register")
     public String registerTag(@ModelAttribute TagRegister tagRegister){
-        tagService.registerTag(tagRegister.getProjectId(),new TagRegisterDto(tagRegister.getTagContent()));
+        tagService.registerTag(tagRegister.getProjectId(),new TagRegisterDto(tagRegister.getTagtitle()));
         return "redirect:/projects/"+tagRegister.getProjectId();
     }
 }

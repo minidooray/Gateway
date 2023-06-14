@@ -25,14 +25,14 @@ public class MilestoneController {
     private final ProjectService projectService;
 
     @GetMapping("projects/{id}/milestone/register")
-    public String viewRegisterMilestone(@PathVariable Long id, Model model) throws ProjectNotFoundException {
-        model.addAttribute("Project",projectService.getProject(id));
+    public String viewRegisterMilestone(@PathVariable Long id, Model model) {
+        model.addAttribute("ProjectId",id);
         model.addAttribute("Select","milestone");
         return "chores";
     }
     @PostMapping("projects/milestone/register")
     public String registerMilestone(@ModelAttribute MilestoneRegister milestoneRegister){
-        milestoneService.registerMilestone(milestoneRegister.getProjectId(),new MilestoneRegisterDto(milestoneRegister.getMilestoneContent(), LocalDate.now(), LocalDate.parse(milestoneRegister.getMilestoneEndAt(), DateTimeFormatter.ISO_DATE)));
+        milestoneService.registerMilestone(milestoneRegister.getProjectId(),new MilestoneRegisterDto(milestoneRegister.getMilestonetitle(), LocalDate.now(), LocalDate.parse(milestoneRegister.getDueDate(), DateTimeFormatter.ISO_DATE)));
         return "redirect:/projects/"+milestoneRegister.getProjectId();
     }
 }

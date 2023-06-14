@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TagRegister {
     private Long projectId;
-    private String tagContent;
+    private String tagtitle;
 }

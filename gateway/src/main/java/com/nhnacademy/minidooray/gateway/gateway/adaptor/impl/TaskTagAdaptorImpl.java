@@ -2,7 +2,7 @@ package com.nhnacademy.minidooray.gateway.gateway.adaptor.impl;
 
 import com.nhnacademy.minidooray.gateway.gateway.adaptor.TaskTagAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
-import com.nhnacademy.minidooray.gateway.gateway.domain.task.TaskTagDto;
+import com.nhnacademy.minidooray.gateway.gateway.domain.tasktag.TaskTagDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;

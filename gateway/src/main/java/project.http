@@ -43,3 +43,8 @@ Content-Type: application/json
 GET /projects/1/tasks
 Host: localhost:8080
 Content-Type: application/json
+
+###
+GET /projects/1/tasks/16/comments
+Host: localhost:8082
+Content-Type: application/json

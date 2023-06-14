@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -27,11 +28,11 @@ public class ProjectMemberController {
     public String viewProjectMemberRegister(@PathVariable Long id, Model model){
         List<ProjectMemberId> projectMemberIds = projectMemberService.getMemberIdsByProjectId(id);
         List<AccountDto> accounts = accountService.getAccounts();
-        for(ProjectMemberId memberId:projectMemberIds){
-            for(AccountDto accountDto:accounts){
-                if(accountDto.getAccountId().equals(memberId)){
-                    accounts.remove(accountDto);
-                }
+        Iterator<AccountDto> iterator = accounts.iterator();
+        while (iterator.hasNext()) {
+            AccountDto account = iterator.next();
+            if (projectMemberIds.stream().anyMatch(memberId -> memberId.getAccountId().equals(account.getAccountId()))) {
+                iterator.remove();
             }
         }
         model.addAttribute("Accounts", accounts);
@@ -40,11 +41,13 @@ public class ProjectMemberController {
     }
     @PostMapping("/projects/projectMember/register")
     public String registerProjectMember(@ModelAttribute ProjectMemberRegister projectMemberRegister){
-        if(projectMemberRegister.getAccountId().isEmpty()){
-            return "/project";
+        if(projectMemberRegister.getSelectedAccounts().isEmpty()){
+            return "redirect:/project";
         }
-        projectMemberService.registerProject(projectMemberRegister.getProjectId(),projectMemberRegister.getAccountId());
-        return "/project";
+        for(String accountId: projectMemberRegister.getSelectedAccounts()){
+            projectMemberService.registerProject(projectMemberRegister.getProjectId(),accountId);
+        }
+        return "redirect:/projects/"+projectMemberRegister.getProjectId();
     }
 
 }

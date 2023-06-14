@@ -1,7 +1,7 @@
 package com.nhnacademy.minidooray.gateway.gateway.adaptor;
 
 import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
-import com.nhnacademy.minidooray.gateway.gateway.domain.task.TaskTagDto;
+import com.nhnacademy.minidooray.gateway.gateway.domain.tasktag.TaskTagDto;
 
 import java.util.List;
 import java.util.Optional;

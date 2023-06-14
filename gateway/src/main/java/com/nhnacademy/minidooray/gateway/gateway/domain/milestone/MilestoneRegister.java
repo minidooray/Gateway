@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MilestoneRegister {
     private Long projectId;
-    private String milestoneContent;
-    private String milestoneEndAt;
+    private String milestonetitle;
+    private String dueDate;
 }

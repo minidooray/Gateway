@@ -37,7 +37,7 @@ public class TagAdaptorImpl implements TagAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<TagDto> exchange =
-                restTemplate.exchange("http://localhost:8082/project/1/tags/{tagId}",HttpMethod.GET,entity, TagDto.class,tagId);
+                restTemplate.exchange("http://localhost:8082/projects/1/tags/{tagId}",HttpMethod.GET,entity, TagDto.class,tagId);
         return Optional.of(exchange.getBody());
     }
 
@@ -48,7 +48,7 @@ public class TagAdaptorImpl implements TagAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(tagRegisterDto,headers);
         ResponseEntity<Result> exchange =
-                restTemplate.exchange("http://localhost:8082/project/{projectId}/tags",HttpMethod.POST,entity, Result.class,projectId);
+                restTemplate.exchange("http://localhost:8082/projects/{projectId}/tags",HttpMethod.POST,entity, Result.class,projectId);
         return Optional.of(exchange.getBody());
     }
 }

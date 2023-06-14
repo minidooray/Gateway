@@ -9,7 +9,7 @@
 <body>
 <div class="center">
     <div class="form-container">
-        <form method="post" th:action="${Select == 'tag' ? '/projects/tag/register' : 'projects/milestone/register'}">
+        <form method="post" th:action="${Select == 'tag' ? '/projects/tag/register' : '/projects/milestone/register'}">
             <div th:if="${Select} == 'tag'">
                 <label for="tagtitle">태그명:</label>
                 <input type="text" id="tagtitle" name="tagtitle" required>
