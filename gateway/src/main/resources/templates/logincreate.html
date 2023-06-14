@@ -23,6 +23,10 @@
     <input type="email" id="email" name="email" required /><br />
 
     <input type="submit" value="가입하기" />
+    <div class="error" th:if="${param.error != null}" th:switch="${#strings.toString(param.error)}">
+        <span th:case="duplicatedId">* 이미 존재하는 아이디입니다. *</span>
+        <span th:case="duplicatedEmail">* 이미 가입한 이메일 회원입니다. *</span>
+    </div>
 </form>
 
 </body>

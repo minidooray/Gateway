@@ -27,7 +27,7 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public TaskDto getTask(Long taskId) throws ProjectNotFoundException {
+    public TaskDto getTask(Long taskId) {
         if(adaptor.getTask(taskId).isPresent()){
             return adaptor.getTask(taskId).get();
         } else {
