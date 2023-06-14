@@ -104,7 +104,7 @@
             </div>
         </div>
 
-        <div th:if="${Select} == 'task'" style="padding: 20px; background-color: #f5f5f5; border-radius: 5px; height: 600px;">
+        <div th:if="${Select} == 'task'" style="padding: 20px; background-color: #f5f5f5; border-radius: 5px; height: auto;">
             <div style="margin-bottom: 10px; background: white;">
                 <p th:text="${Task.taskId + '/' + Task.taskManagerId}" style="font-size: 18px; color: #333; font-weight: bold;"></p>
                 <h1 th:text="${Task.taskTitle}" style="color: #000;"></h1>
@@ -118,7 +118,7 @@
             </div>
             <div th:if="${Comments != null}">
                 <h2>히스토리</h2>
-                <div th:each="comment : ${Comments}" style="margin-top: 20px;">
+                <div th:each="comment : ${Comments}" style="margin-top: 20px; border-style: solid; border-color: black;">
                     <textarea th:value="${comment.commentId}" th:text="${comment.commentContent}" style="width: 100%; height: 80px; font-size: 14px; color: #333; background-color: white; border: none; outline: none;" readonly></textarea>
                 </div>
             </div>
