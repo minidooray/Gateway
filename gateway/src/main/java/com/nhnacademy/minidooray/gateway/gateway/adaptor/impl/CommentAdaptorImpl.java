@@ -26,7 +26,7 @@ public class CommentAdaptorImpl implements CommentAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<List<CommentDto>> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/{taskId}/tasks/1/comments", HttpMethod.GET, entity, new ParameterizedTypeReference<List<CommentDto>>() {
+                restTemplate.exchange("http://localhost:8082/projects/1/tasks/{taskId}/comments", HttpMethod.GET, entity, new ParameterizedTypeReference<List<CommentDto>>() {
                 },taskId);
         return Optional.of(exchange.getBody());
     }
