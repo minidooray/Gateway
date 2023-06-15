@@ -12,10 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static java.time.LocalDate.now;
 
@@ -46,8 +43,13 @@ public class AccountAdaptorImpl implements AccountAdaptor {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
-        ResponseEntity<List<AccountDto>> exchange = restTemplate.
-                exchange("http://localhost:8081/account",HttpMethod.GET,entity,new ParameterizedTypeReference<List<AccountDto>>(){});
+        ResponseEntity<List<AccountDto>> exchange;
+        try{
+            exchange = restTemplate.
+                    exchange("http://localhost:8081/account",HttpMethod.GET,entity,new ParameterizedTypeReference<List<AccountDto>>(){});
+        } catch (Exception e){
+            return Optional.empty();
+        }
         return Optional.of(exchange.getBody());
     }
 
@@ -55,7 +57,6 @@ public class AccountAdaptorImpl implements AccountAdaptor {
     @Override
     public Optional<AccountDto> registerAccount(AccountRegister accountRegister) {
         HttpHeaders headers = new HttpHeaders();
-        log.info("asdasd:{}",accountRegister.getAccountId());
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         Map<String, Object> params = new HashMap<>();
@@ -75,7 +76,6 @@ public class AccountAdaptorImpl implements AccountAdaptor {
     @Override
     public Optional<AccountDto> getAccountByEmail(String accountEmail) {
         HttpHeaders headers = new HttpHeaders();
-        log.info("email:{}",accountEmail);
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);

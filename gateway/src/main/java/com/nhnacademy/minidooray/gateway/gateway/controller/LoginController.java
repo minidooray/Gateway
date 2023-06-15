@@ -3,7 +3,10 @@ package com.nhnacademy.minidooray.gateway.gateway.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountRegister;
+import com.nhnacademy.minidooray.gateway.gateway.exception.AlreadyAccountEmailException;
+import com.nhnacademy.minidooray.gateway.gateway.exception.AlreadyAccountException;
 import com.nhnacademy.minidooray.gateway.gateway.service.account.AccountService;
+import com.nhnacademy.minidooray.gateway.gateway.service.github.GithubLoginService;
 import com.nhnacademy.minidooray.gateway.gateway.service.github.GithubLoginServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +31,7 @@ import java.util.Objects;
 @PropertySource("classpath:github.properties")
 @RequiredArgsConstructor
 public class LoginController {
-    private final GithubLoginServiceImpl githubLoginService;
+    private final GithubLoginService githubLoginService;
     private final RedisTemplate<String, String> redisTemplate;
     private final AccountService accountService;
     @Value("${github.client_id}")
@@ -98,7 +101,15 @@ public class LoginController {
         account.setAccountPwd(password);
         account.setAccountEmail(email);
         // 계정 등록 로직 수행
-        accountService.registerAccount(account);
+
+        try {
+            accountService.registerAccount(account);
+        } catch (AlreadyAccountException e){
+            return "redirect:/loginform?error=duplicatedId";
+        } catch (AlreadyAccountEmailException e){
+            return "redirect:/loginform?error=duplicatedEmail";
+        }
+
         redirectAttributes.addAttribute("success", "true");
 
         return "redirect:/login";

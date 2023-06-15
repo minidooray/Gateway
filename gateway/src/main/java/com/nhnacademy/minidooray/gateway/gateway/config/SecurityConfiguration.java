@@ -3,6 +3,8 @@ package com.nhnacademy.minidooray.gateway.gateway.config;
 import com.nhnacademy.minidooray.gateway.gateway.auth.CustomLogoutSuccessHandler;
 import com.nhnacademy.minidooray.gateway.gateway.auth.LoginSuccessHandler;
 import com.nhnacademy.minidooray.gateway.gateway.service.CustomUserDetailsService;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;

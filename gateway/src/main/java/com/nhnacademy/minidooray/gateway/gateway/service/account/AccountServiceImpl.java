@@ -4,6 +4,8 @@ import com.nhnacademy.minidooray.gateway.gateway.adaptor.AccountAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountRegister;
+import com.nhnacademy.minidooray.gateway.gateway.exception.AlreadyAccountEmailException;
+import com.nhnacademy.minidooray.gateway.gateway.exception.AlreadyAccountException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,11 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public AccountDto registerAccount(AccountRegister accountRegister) {
+        if(adaptor.getAccountById(accountRegister.getAccountId()).isPresent()){
+            throw new AlreadyAccountException(accountRegister.getAccountId());
+        } else if(adaptor.getAccountByEmail(accountRegister.getAccountEmail()).isPresent()){
+            throw new AlreadyAccountEmailException(accountRegister.getAccountEmail());
+        }
         return adaptor.registerAccount(accountRegister).get();
     }
 

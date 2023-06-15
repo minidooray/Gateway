@@ -25,7 +25,7 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
-    public ProjectDto getProject(Long id) throws ProjectNotFoundException {
+    public ProjectDto getProject(Long id){
         if(adaptor.getProjectById(id).isPresent()){
             return adaptor.getProjectById(id).get();
         } else {

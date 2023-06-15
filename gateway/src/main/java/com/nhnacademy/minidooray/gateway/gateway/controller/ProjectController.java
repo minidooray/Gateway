@@ -64,7 +64,7 @@ public class ProjectController {
         return "project";
     }
     @GetMapping("/projects/{id}")
-    public String viewTaskByProjectId(@PathVariable Long id,Model model,HttpSession session) throws ProjectNotFoundException {
+    public String viewTaskByProjectId(@PathVariable Long id,Model model,HttpSession session) {
         String id2 = (String) session.getAttribute("username");
         List<ProjectIdDto> ids = memberService.getProjectIdsByMemberId(id2);
         List<ProjectMemberId> memberIds = memberService.getMemberIdsByProjectId(id);
@@ -93,7 +93,7 @@ public class ProjectController {
         return "project";
     }
     @GetMapping("/projects/{id}/task/{taskId}")
-    public String viewTaskByProjectIdAndTaskId(@PathVariable Long id,@PathVariable Long taskId,Model model,HttpSession session) throws ProjectNotFoundException {
+    public String viewTaskByProjectIdAndTaskId(@PathVariable Long id,@PathVariable Long taskId,Model model,HttpSession session) {
         String id2 = (String) session.getAttribute("username");
         List<ProjectIdDto> ids = memberService.getProjectIdsByMemberId(id2);
         for(ProjectIdDto d : ids){

@@ -3,10 +3,11 @@ package com.nhnacademy.minidooray.gateway.gateway.adaptor;
 import com.nhnacademy.minidooray.gateway.gateway.domain.Result;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountRegister;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-
+@Component
 public interface AccountAdaptor {
 
     Optional<AccountDto> getAccountById(String accountId);
