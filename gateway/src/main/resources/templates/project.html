@@ -105,14 +105,34 @@
         </div>
 
         <div th:if="${Select} == 'task'" style="padding: 20px; background-color: #f5f5f5; border-radius: 5px; height: auto;">
-            <div style="margin-bottom: 10px; background: white;">
+            <div style="margin-bottom: 10px; background: white; position: relative;">
+                <a href="#" th:href="'/delete/task/' + ${Task.taskId}" style="position: absolute; top: 0; right: 0; font-size: 14px; color: red;">Task 삭제</a>
+                <a href="#" th:href="'/edit/task/' + ${Task.taskId}" style="position: absolute; top: 20px; right: 0; font-size: 14px; color: blue;">Task 수정</a>
                 <p th:text="${Task.taskId + '/' + Task.taskManagerId}" style="font-size: 18px; color: #333; font-weight: bold;"></p>
                 <h1 th:text="${Task.taskTitle}" style="color: #000;"></h1>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li  th:each="tag : ${Tag}" th:text="${tag}" style="font-weight: bold; color: #333;"></li>
+                    <li  th:if="${Tag == null or Tag.isEmpty()}">No tags available</li>
+                </ul>
             </div>
-            <div style="font-size: 14px; color: #666; background: white;">
+
+            <div style="font-size: 14px; color: #666; background: white; position: relative;">
+
+                <div style="position: absolute; top: 0; right: 0;" th:if="${Milestone != null}">
+                    <p th:text=" ${Milestone.date}"></p>
+                    <p th:text="'Milestone: ' + ${Milestone.name}"></p>
+                </div>
+                <div style="position: absolute; top: 0; right: 0;" th:if="${Milestone == null}">
+                    <p>No milestone</p>
+                </div>
+
                 <p th:text="'등록자: ' + ${session.username}"></p>
                 <p th:text="'담당자: ' + ${Task.taskManagerId}"></p>
+                <div style="position: absolute; top: calc(100% + 10px); right: 0;">
+
+                </div>
             </div>
+
             <div style="width: 100%; height: 180px;">
                 <textarea th:text="${Task.taskContent}" readonly style="width: 100%; height: 100%; font-size: 25px; color: #333; background-color: white; border: none; outline: none;"></textarea>
             </div>
