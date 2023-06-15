@@ -4,6 +4,7 @@ import com.nhnacademy.minidooray.gateway.gateway.adaptor.ProjectMemberAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.adaptor.TaskAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.adaptor.TaskTagAdaptor;
 import com.nhnacademy.minidooray.gateway.gateway.domain.account.AccountDto;
+import com.nhnacademy.minidooray.gateway.gateway.domain.milestone.MilestoneDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.project.*;
 import com.nhnacademy.minidooray.gateway.gateway.domain.tag.TagDto;
 import com.nhnacademy.minidooray.gateway.gateway.domain.tasktag.TaskTagDto;
@@ -115,12 +116,16 @@ public class ProjectController {
         for(TaskTagDto tagId: tagIds){
             tags.add(tagService.getTag(tagId.getTagId()));
         }
+
+        List<MilestoneDto> milestoneDto = mileService.getMilestonesByProjectId(id);
+
         model.addAttribute("Projects",matchingProjects);
         model.addAttribute("Tasks",taskService.getTaskByProjectId(id));
         model.addAttribute("Select", "task");
         model.addAttribute("Project",projectService.getProject(id));
         model.addAttribute("Task",taskService.getTask(taskId));
         model.addAttribute("Tags",tags);
+        model.addAttribute("Milestone",milestoneDto.get(0));
         model.addAttribute("Comments",commentService.getCommentsByTaskId(taskId));
 
         return "project";
