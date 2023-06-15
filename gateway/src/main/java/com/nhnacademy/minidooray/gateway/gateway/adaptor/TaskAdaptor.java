@@ -13,4 +13,7 @@ public interface TaskAdaptor {
     Optional<List<TaskDto>> getTaskByProjectId(Long id);
     Optional<TaskDto> registerTask(Long projectId,TaskRegister taskRegister);
     Optional<TaskDto> getTask(Long id);
+
+    Optional<Result> deleteTask(Long id);
+    Optional<Result> updateTask(Long projectId, Long taskId, TaskRegister taskRegister);
 }

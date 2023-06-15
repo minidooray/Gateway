@@ -24,7 +24,7 @@ public class ProjectMemberAdaptorImpl implements ProjectMemberAdaptor {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<List<ProjectIdDto>> exchange = restTemplate
-                .exchange("http://localhost:8082/projects/members/{id}", HttpMethod.GET, entity, new ParameterizedTypeReference<List<ProjectIdDto>>() {
+                .exchange("http://localhost:8083/projects/members/{id}", HttpMethod.GET, entity, new ParameterizedTypeReference<List<ProjectIdDto>>() {
         },memberId);
         return Optional.of(exchange.getBody());
     }
@@ -36,7 +36,7 @@ public class ProjectMemberAdaptorImpl implements ProjectMemberAdaptor {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<Result> exchange = restTemplate
-                .exchange("http://localhost:8082/projects/{projectId}/members/{memberId}", HttpMethod.POST, entity, Result.class,projectId,memberId);
+                .exchange("http://localhost:8083/projects/{projectId}/members/{memberId}", HttpMethod.POST, entity, Result.class,projectId,memberId);
         return Optional.of(exchange.getBody());
     }
 
@@ -47,7 +47,7 @@ public class ProjectMemberAdaptorImpl implements ProjectMemberAdaptor {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<List<ProjectMemberId>> exchange = restTemplate
-                .exchange("http://localhost:8082/projects/{projectId}/members", HttpMethod.GET, entity, new ParameterizedTypeReference<List<ProjectMemberId>>() {
+                .exchange("http://localhost:8083/projects/{projectId}/members", HttpMethod.GET, entity, new ParameterizedTypeReference<List<ProjectMemberId>>() {
                 }, projectId);
         return Optional.of(exchange.getBody());
     }

@@ -25,7 +25,7 @@ public class TagAdaptorImpl implements TagAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<List<TagDto>> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/{id}/tags", HttpMethod.GET, entity, new ParameterizedTypeReference<List<TagDto>>() {
+                restTemplate.exchange("http://localhost:8083/projects/{id}/tags", HttpMethod.GET, entity, new ParameterizedTypeReference<List<TagDto>>() {
                 },projectId);
         return Optional.of(exchange.getBody());
     }
@@ -37,7 +37,7 @@ public class TagAdaptorImpl implements TagAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<TagDto> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/1/tags/{tagId}",HttpMethod.GET,entity, TagDto.class,tagId);
+                restTemplate.exchange("http://localhost:8083/projects/1/tags/{tagId}",HttpMethod.GET,entity, TagDto.class,tagId);
         return Optional.of(exchange.getBody());
     }
 
@@ -48,7 +48,12 @@ public class TagAdaptorImpl implements TagAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(tagRegisterDto,headers);
         ResponseEntity<Result> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/{projectId}/tags",HttpMethod.POST,entity, Result.class,projectId);
+                restTemplate.exchange("http://localhost:8083/projects/{projectId}/tags",HttpMethod.POST,entity, Result.class,projectId);
         return Optional.of(exchange.getBody());
+    }
+
+    @Override
+    public Optional<Result> deleteTag() {
+        return Optional.empty();
     }
 }

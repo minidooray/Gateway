@@ -34,4 +34,14 @@ public class TaskServiceImpl implements TaskService{
             throw new ProjectNotFoundException(taskId.toString());
         }
     }
+
+    @Override
+    public Result deleteTask(Long id) {
+        return adaptor.deleteTask(id).get();
+    }
+
+    @Override
+    public Result updateTask(Long projectId, Long taskId, TaskRegister taskRegister) {
+        return adaptor.updateTask(projectId,taskId,taskRegister).get();
+    }
 }

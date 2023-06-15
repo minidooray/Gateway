@@ -23,7 +23,7 @@ public class TaskTagAdaptorImpl implements TaskTagAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<Result> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/{projectId}/tasks/{taskId}/tags/{tagId}", HttpMethod.POST,entity,Result.class,projectId,taskId,tagId);
+                restTemplate.exchange("http://localhost:8083/projects/{projectId}/tasks/{taskId}/tags/{tagId}", HttpMethod.POST,entity,Result.class,projectId,taskId,tagId);
 
         return Optional.of(exchange.getBody());
     }
@@ -35,7 +35,7 @@ public class TaskTagAdaptorImpl implements TaskTagAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<List<TaskTagDto>> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/1/tasks/{taskId}/tags", HttpMethod.GET, entity, new ParameterizedTypeReference<List<TaskTagDto>>() {
+                restTemplate.exchange("http://localhost:8083/projects/1/tasks/{taskId}/tags", HttpMethod.GET, entity, new ParameterizedTypeReference<List<TaskTagDto>>() {
                 }, taskId);
 
         return Optional.of(exchange.getBody());

@@ -26,7 +26,7 @@ public class CommentAdaptorImpl implements CommentAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<List<CommentDto>> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/1/tasks/{taskId}/comments", HttpMethod.GET, entity, new ParameterizedTypeReference<List<CommentDto>>() {
+                restTemplate.exchange("http://localhost:8083/projects/1/tasks/{taskId}/comments", HttpMethod.GET, entity, new ParameterizedTypeReference<List<CommentDto>>() {
                 },taskId);
         return Optional.of(exchange.getBody());
     }
@@ -38,7 +38,23 @@ public class CommentAdaptorImpl implements CommentAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(commentRegisterDto,headers);
         ResponseEntity<Result> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/1/tasks/{taskId}/comments", HttpMethod.POST, entity, Result.class,taskId);
+                restTemplate.exchange("http://localhost:8083/projects/1/tasks/{taskId}/comments", HttpMethod.POST, entity, Result.class,taskId);
         return Optional.of(exchange.getBody());
+    }
+
+    @Override
+    public Optional<Result> deleteComment(Long commentId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        HttpEntity entity = new HttpEntity(headers);
+        ResponseEntity<Result> exchange =
+                restTemplate.exchange("http://localhost:8083/projects/1/tasks/1/comments/{commentId}",HttpMethod.DELETE,entity,Result.class,commentId);
+        return Optional.of(exchange.getBody());
+    }
+
+    @Override
+    public Optional<Result> updateComment(Long commentId, CommentRegisterDto commentRegisterDto) {
+        return Optional.empty();
     }
 }

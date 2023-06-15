@@ -29,7 +29,7 @@ public class ProjectAdaptorImpl implements ProjectAdaptor {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<List<ProjectDto>> exchange = restTemplate.
-                exchange("http://localhost:8082/projects", HttpMethod.GET, entity, new ParameterizedTypeReference<List<ProjectDto>>() {
+                exchange("http://localhost:8083/projects", HttpMethod.GET, entity, new ParameterizedTypeReference<List<ProjectDto>>() {
         });
         return Optional.of(exchange.getBody());
     }
@@ -41,7 +41,7 @@ public class ProjectAdaptorImpl implements ProjectAdaptor {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<ProjectDto> exchange = restTemplate.
-                exchange("http://localhost:8082/projects/{projectId}",HttpMethod.GET,entity, ProjectDto.class,id);
+                exchange("http://localhost:8083/projects/{projectId}",HttpMethod.GET,entity, ProjectDto.class,id);
         return Optional.of(exchange.getBody());
     }
 
@@ -55,7 +55,7 @@ public class ProjectAdaptorImpl implements ProjectAdaptor {
         params.put("projectName", projectRegister.getProjectName());
         params.put("projectDescription", projectRegister.getProjectDescription());
         HttpEntity entity = new HttpEntity(projectRegister,headers);
-        ResponseEntity<ProjectDto> exchange = restTemplate.exchange("http://localhost:8082/projects",HttpMethod.POST,entity,ProjectDto.class);
+        ResponseEntity<ProjectDto> exchange = restTemplate.exchange("http://localhost:8083/projects",HttpMethod.POST,entity,ProjectDto.class);
         return Optional.of(exchange.getBody());
     }
 
@@ -65,7 +65,7 @@ public class ProjectAdaptorImpl implements ProjectAdaptor {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(projectStatusDto,headers);
-        ResponseEntity<Result> exchange = restTemplate.exchange("http://localhost:8082/project/{id}",HttpMethod.PATCH,entity,Result.class,id);
+        ResponseEntity<Result> exchange = restTemplate.exchange("http://localhost:8083/project/{id}",HttpMethod.PATCH,entity,Result.class,id);
         return Optional.of(exchange.getBody());
     }
 }

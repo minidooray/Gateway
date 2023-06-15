@@ -22,4 +22,14 @@ public class CommentServiceImpl implements CommentService{
     public Result registerCommentByTaskId(Long taskId, CommentRegisterDto registerDto) {
         return adaptor.registerCommentByTaskId(taskId,registerDto).get();
     }
+
+    @Override
+    public Result deleteComment(Long commentId) {
+        return adaptor.deleteComment(commentId).get();
+    }
+
+    @Override
+    public Result updateComment(Long commentId, CommentRegisterDto commentRegisterDto) {
+        return adaptor.updateComment(commentId,commentRegisterDto).get();
+    }
 }

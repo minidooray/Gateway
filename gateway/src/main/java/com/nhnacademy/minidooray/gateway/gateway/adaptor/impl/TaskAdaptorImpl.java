@@ -24,7 +24,7 @@ public class TaskAdaptorImpl implements TaskAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity entity = new HttpEntity(headers);
-        ResponseEntity<List<TaskDto>> exchange = restTemplate.exchange("http://localhost:8082/projects/{id}/tasks", HttpMethod.GET, entity, new ParameterizedTypeReference<List<TaskDto>>() {
+        ResponseEntity<List<TaskDto>> exchange = restTemplate.exchange("http://localhost:8083/projects/{id}/tasks", HttpMethod.GET, entity, new ParameterizedTypeReference<List<TaskDto>>() {
         },id);
         return Optional.of(exchange.getBody());
     }
@@ -36,7 +36,7 @@ public class TaskAdaptorImpl implements TaskAdaptor {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity entity = new HttpEntity(taskRegister,headers);
         ResponseEntity<TaskDto> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/{id}/tasks", HttpMethod.POST, entity, TaskDto.class, projectId);
+                restTemplate.exchange("http://localhost:8083/projects/{id}/tasks", HttpMethod.POST, entity, TaskDto.class, projectId);
         return Optional.of(exchange.getBody());
     }
 
@@ -47,7 +47,29 @@ public class TaskAdaptorImpl implements TaskAdaptor {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<TaskDto> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/1/tasks/{id}", HttpMethod.GET, entity, TaskDto.class, id);
+                restTemplate.exchange("http://localhost:8083/projects/1/tasks/{id}", HttpMethod.GET, entity, TaskDto.class, id);
+        return Optional.of(exchange.getBody());
+    }
+
+    @Override
+    public Optional<Result> deleteTask(Long id) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity entity = new HttpEntity(headers);
+        ResponseEntity<Result> exchange =
+                restTemplate.exchange("http://localhost:8083/projects/1/tasks/{id}",HttpMethod.DELETE, entity,Result.class,id);
+        return Optional.of(exchange.getBody());
+    }
+
+    @Override
+    public Optional<Result> updateTask(Long projectId, Long taskId, TaskRegister taskRegister) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity entity = new HttpEntity(taskRegister,headers);
+        ResponseEntity<Result> exchange =
+                restTemplate.exchange("http://localhost:8083/projects/{projectId}/tasks/{taskId}",HttpMethod.PATCH, entity,Result.class,projectId,taskId);
         return Optional.of(exchange.getBody());
     }
 

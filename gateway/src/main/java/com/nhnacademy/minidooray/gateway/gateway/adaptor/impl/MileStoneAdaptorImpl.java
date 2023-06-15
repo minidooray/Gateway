@@ -24,7 +24,7 @@ public class MileStoneAdaptorImpl implements MilestoneAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<List<MilestoneDto>> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/{id}/milestones", HttpMethod.GET, entity, new ParameterizedTypeReference<List<MilestoneDto>>() {
+                restTemplate.exchange("http://localhost:8083/projects/{id}/milestones", HttpMethod.GET, entity, new ParameterizedTypeReference<List<MilestoneDto>>() {
                 },projectId);
         return Optional.of(exchange.getBody());
     }
@@ -36,7 +36,7 @@ public class MileStoneAdaptorImpl implements MilestoneAdaptor {
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         HttpEntity entity = new HttpEntity(milestoneRegisterDto,headers);
         ResponseEntity<Result> exchange =
-                restTemplate.exchange("http://localhost:8082/projects/{id}/milestones", HttpMethod.POST, entity,Result.class,projectId);
+                restTemplate.exchange("http://localhost:8083/projects/{id}/milestones", HttpMethod.POST, entity,Result.class,projectId);
         return Optional.of(exchange.getBody());
     }
 }

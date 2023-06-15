@@ -12,4 +12,5 @@ public interface TagAdaptor {
     Optional<List<TagDto>> getTagsByProjectId(Long projectId);
     Optional<TagDto> getTag(Long tagId);
     Optional<Result> registerTag(Long projectId, TagRegisterDto tagRegisterDto);
+    Optional<Result> deleteTag();
 }
